@@ -18,8 +18,21 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f"✅ Logged in as {bot.user}")
-    change_name.start()
+    """Event triggered when bot is ready and connected to Discord"""
+    print(f"Bot is ready! Logged in as {bot.user.name} (ID: {bot.user.id})")
+    logger.info(
+        f"Bot connected successfully - {bot.user.name} ({bot.user.id})")
+    
+    # Generate and display invite link
+    app_id = os.getenv('APPLICATION_ID') or bot.user.id
+    invite_url = f"https://discord.com/api/oauth2/authorize?client_id={app_id}&permissions=8&scope=bot"
+    
+    print("\n" + "="*70)
+    print("🔗 BOT INVITE LINK - Copy this URL to add bot to your server:")
+    print("="*70)
+    print(invite_url)
+    print("="*70 + "\n")
+    logger.info(f"Invite URL: {invite_url}")
 
 # 💬 Command: !mrbean <new_name>
 @bot.command()
