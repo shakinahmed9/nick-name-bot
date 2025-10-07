@@ -71,3 +71,5 @@ def run_flask():
 
 import threading
 threading.Thread(target=run_flask).start()
+
+keepalive()
